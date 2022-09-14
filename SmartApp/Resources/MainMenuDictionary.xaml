@@ -17,11 +17,11 @@
         <Setter Property="Margin" Value="20 2 20 2" />
         <Setter Property="Padding" Value="15 12" />
         <Setter Property="FontSize" Value="22" />
-        <Setter Property="FontFamily" Value="{StaticResource FontAwesome-Regular}" />
+        <Setter Property="FontFamily" Value="{StaticResource FontAwesome-Solid}" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="RadioBUtton">
+                <ControlTemplate TargetType="RadioButton">
                     <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" CornerRadius="7" BorderBrush="#ffffff" BorderThickness="1">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
