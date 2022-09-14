@@ -1,5 +1,4 @@
-﻿using SmartApp.MVVM.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +10,7 @@ namespace SmartApp.MVVM.ViewModels
     {
         private object _currentView;
         public RelayCommand KitchenViewCommand { get; set; }
-        public KitchenViewModel KitchenVM { get; set; }
+        public KitchenViewModel KitchenViewModel { get; set; }
 
         public object CurrentView
         {
@@ -25,10 +24,10 @@ namespace SmartApp.MVVM.ViewModels
 
         public MainViewModel()
         {
-            KitchenViewCommand = new RelayCommand(x => { CurrentView = KitchenVM; });
-            KitchenVM = new KitchenViewModel();
+            KitchenViewModel = new KitchenViewModel();
+            KitchenViewCommand = new RelayCommand(x => { CurrentView = KitchenViewModel; });
+            CurrentView = KitchenViewModel;
 
-            CurrentView = KitchenVM;
         }
     }
 }

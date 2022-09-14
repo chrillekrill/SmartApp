@@ -27,10 +27,11 @@ namespace SmartApp
         
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            if (e.ChangedButton == MouseButton.Left)
+                DragMove();
         }
 
-        private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void TitleBar_LeftButtonMouseDown(object sender, MouseButtonEventArgs e)
         {
 
         }

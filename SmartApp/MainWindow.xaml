@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SmartApp" xmlns:components="clr-namespace:SmartApp.Components"
+        xmlns:local="clr-namespace:SmartApp" 
+        xmlns:components="clr-namespace:SmartApp.Components" 
+        xmlns:viewModels="clr-namespace:SmartApp.MVVM.ViewModels"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
@@ -12,16 +14,21 @@
         Title="SmartApp" 
         Height="720" 
         Width="1080">
-    <Border MouseDown="TitleBar_MouseDown" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
-        <Grid>
+    <Window.DataContext>
+        <viewModels:MainViewModel />
+    </Window.DataContext>
+
+    <!--MouseDown="TitleBar_MouseDown" MouseLeftButtonDown="TitleBar_LeftButtonMouseDown"-->
+    <Border MouseDown="TitleBar_MouseDown" MouseLeftButtonDown="TitleBar_LeftButtonMouseDown">
+        <Grid Margin="-79,20,79,-20">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="auto"/>
-
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
-            <ContentControl Grid.Row="0" Content=""/>
-            <components:MainMenu Grid.Row="1" Margin="0 -150 0 0"/>
 
+            <ContentControl Grid.Row="0" Content="{Binding CurrentView}" />
+            <components:MainMenu Grid.Row="1" Margin="0 -140 0 0" />
         </Grid>
     </Border>
+
 </Window>

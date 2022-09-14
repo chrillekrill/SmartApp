@@ -53,7 +53,7 @@ namespace SmartApp.Components {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/SmartApp;V1.0.0.0;component/components/mainmenucomponent.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/SmartApp;component/components/mainmenucomponent.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Components\MainMenuComponent.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
