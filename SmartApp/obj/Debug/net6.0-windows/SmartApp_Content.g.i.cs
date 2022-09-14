@@ -10,5 +10,8 @@
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/fonts/fa-regular-400.ttf")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/fonts/fa-solid-900.ttf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/images/bedroom.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/images/livingroom.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/images/kitchen.jpg")]
 
 
