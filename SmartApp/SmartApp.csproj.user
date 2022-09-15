@@ -10,12 +10,18 @@
     <Compile Update="Components\MainMenuComponent.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Components\Tile.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MVVM\Views\KitchenView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Components\MainMenuComponent.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Components\Tile.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">

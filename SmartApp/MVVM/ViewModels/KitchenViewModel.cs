@@ -10,6 +10,8 @@ namespace SmartApp.MVVM.ViewModels
     {
         public string Title { get; set; } = "Kitchen and dining";
         public string Temperature { get; set; } = "24";
+        public string TemperatureScale { get; set; } = "°C";
         public string Humidity { get; set; } = "33";
+        public string HumidityScale { get; set; } = "%";
     }
 }

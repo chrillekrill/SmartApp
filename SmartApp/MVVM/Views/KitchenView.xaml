@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SmartApp.MVVM.Views"
+             xmlns:local="clr-namespace:SmartApp.MVVM.Views" xmlns:components="clr-namespace:SmartApp.Components"
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="1080">
     <Border x:Name="Kitchen" Style="{StaticResource pageBorder}">
@@ -31,15 +31,34 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Foreground="#fff" FontSize="22">
                                 <Run Text="{Binding Temperature}" FontSize="32"/>
-                                <Run Text="°C"/>
+                                <Run Text="{Binding TemperatureScale}" />
                             </TextBlock>
                             <TextBlock Margin="40 0 0 0" Foreground="#fff" FontSize="22">
                                 <Run Text="{Binding Humidity}" FontSize="32"/>
-                                <Run Text="%"/>
+                                <Run Text="{Binding HumidityScale}" />
                             </TextBlock>
                         </StackPanel>
                         
                     </StackPanel>
+
+                    <Grid Grid.Column="1" Margin="40 0 0 0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+
+                        <components:Tile Grid.Row="0" Grid.Column="0" />
+                        <components:Tile Grid.Row="0" Grid.Column="1" />
+                        <components:Tile Grid.Row="1" Grid.Column="0" />
+                        <components:Tile Grid.Row="1" Grid.Column="1" />
+
+
+                    </Grid>
+
                 </Grid>
             </Grid>
         </Border>

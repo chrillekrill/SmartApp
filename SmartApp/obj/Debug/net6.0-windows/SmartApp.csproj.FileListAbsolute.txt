@@ -35,3 +35,5 @@ C:\Users\Henri\source\repos\SmartApp\SmartApp\obj\Debug\net6.0-windows\SmartApp.
 C:\Users\Henri\source\repos\SmartApp\SmartApp\obj\Debug\net6.0-windows\ref\SmartApp.dll
 C:\Users\Henri\source\repos\SmartApp\SmartApp\obj\Debug\net6.0-windows\Resources\Borders.baml
 C:\Users\Henri\source\repos\SmartApp\SmartApp\obj\Debug\net6.0-windows\Resources\Buttons.baml
+C:\Users\Henri\source\repos\SmartApp\SmartApp\obj\Debug\net6.0-windows\Components\Tile.g.cs
+C:\Users\Henri\source\repos\SmartApp\SmartApp\obj\Debug\net6.0-windows\Components\Tile.baml

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\Henri\source\repos\SmartApp\SmartApp\App.xaml
-7917706268
+8-1426909371
 51245123748
-91435470257
+10-547848301
 194-200944676
-Components\MainMenuComponent.xaml;MainWindow.xaml;MVVM\Views\KitchenView.xaml;Resources\Borders.xaml;Resources\Buttons.xaml;Resources\Fonts.xaml;Resources\MainMenuDictionary.xaml;
+Components\MainMenuComponent.xaml;Components\Tile.xaml;MainWindow.xaml;MVVM\Views\KitchenView.xaml;Resources\Borders.xaml;Resources\Buttons.xaml;Resources\Fonts.xaml;Resources\MainMenuDictionary.xaml;
 
 False
 
