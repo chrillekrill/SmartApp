@@ -24,8 +24,8 @@ namespace SmartApp.MVVM.ViewModels
 
         public MainViewModel()
         {
-            KitchenViewModel = new KitchenViewModel();
-            KitchenViewCommand = new RelayCommand(x => { CurrentView = KitchenViewModel; });
+            KitchenViewModel = new();
+            new RelayCommand(x => { CurrentView = KitchenViewModel; });
             CurrentView = KitchenViewModel;
 
         }

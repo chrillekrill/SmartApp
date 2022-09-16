@@ -12,6 +12,7 @@
             <RadioButton Style="{StaticResource menuButton}" Content="&#xe51a;" IsChecked="True"/>
             <RadioButton Style="{StaticResource menuButton}" Content="&#xf825;"/>
             <RadioButton Style="{StaticResource menuButton}" Content="&#xf401;"/>
+            <RadioButton x:Name="btnClose" Click="btnClose_Click"  Style="{StaticResource menuButton}" Content="&#xf011;"/>
         </StackPanel>
     </Border>
 </UserControl>

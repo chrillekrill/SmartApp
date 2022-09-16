@@ -32,7 +32,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
                     <Grid>
-                        <Border x:Name="toggleBackground" Background="#8f8f8f" CornerRadius="13" Height="25" Width="50" />
+                        <Border x:Name="toggleBackground" Background="Red" CornerRadius="13" Height="25" Width="50" />
                         <Ellipse x:Name="toggleLever" Fill="#fbfbfb" Height="22" Width="22" HorizontalAlignment="Left" Margin="26 0 0 0" />
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -40,7 +40,7 @@
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <ColorAnimation Storyboard.TargetName="toggleBackground" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#737272" Duration="0:0:0:0.2" />
+                                        <ColorAnimation Storyboard.TargetName="toggleBackground" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="Green" Duration="0:0:0:0.2" />
                                         <ThicknessAnimation Storyboard.TargetName="toggleLever" Storyboard.TargetProperty="Margin" To="2 0 0 0" Duration="0:0:0:0.2" />
                                     </Storyboard>
                                 </BeginStoryboard>
@@ -48,7 +48,7 @@
                             <Trigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <ColorAnimation Storyboard.TargetName="toggleBackground" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#8f8f8f" Duration="0:0:0:0.2" />
+                                        <ColorAnimation Storyboard.TargetName="toggleBackground" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="Red" Duration="0:0:0:0.2" />
                                         <ThicknessAnimation Storyboard.TargetName="toggleLever" Storyboard.TargetProperty="Margin" To="26 0 0 0" Duration="0:0:0:0.2" />
                                     </Storyboard>
                                 </BeginStoryboard>

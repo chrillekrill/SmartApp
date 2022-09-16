@@ -24,5 +24,46 @@ namespace SmartApp.Components
         {
             InitializeComponent();
         }
+
+        public string Title { 
+            get { return (string)GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
+        }
+
+        public DependencyProperty TitleProperty
+            = DependencyProperty.Register("Title", typeof(string), typeof(Tile));
+
+        public bool IsChecked
+        {
+            get { return (bool)GetValue(IsCheckedProperty); }
+            set { SetValue(IsCheckedProperty, value); }
+        }
+
+        public DependencyProperty IsCheckedProperty
+            = DependencyProperty.Register("IsChecked", typeof(bool), typeof(Tile));
+
+
+        public string ActiveIcon
+        {
+            get { return (string)GetValue(ActiveIconProperty); }
+            set { SetValue(ActiveIconProperty, value); }
+        }
+
+        public DependencyProperty ActiveIconProperty
+            = DependencyProperty.Register("activeIcon", typeof(string), typeof(Tile));
+
+        public string InActiveIcon
+        {
+            get { return (string)GetValue(InActiveIconProperty); }
+            set { SetValue(InActiveIconProperty, value); }
+        }
+
+        public DependencyProperty InActiveIconProperty
+            = DependencyProperty.Register("InActiveIcon", typeof(string), typeof(Tile));
+
+        private void toggle_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

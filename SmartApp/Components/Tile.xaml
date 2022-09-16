@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SmartApp.Components"
-             mc:Ignorable="d">
+             mc:Ignorable="d"
+             x:Name="tile">
     <Border Style="{StaticResource tileBorder}">
         <Grid>
             <Grid.RowDefinitions>
@@ -12,24 +13,39 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0" Margin="0 0 0 10">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Text="Off" VerticalAlignment="Center" />
-                <CheckBox Grid.Column="1" Style="{StaticResource toggleButton}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="0" Style="{StaticResource tileToggleText}" VerticalAlignment="Center"/>
+                <CheckBox x:Name="toggle" Grid.Column="1" Style="{StaticResource toggleButton}" HorizontalAlignment="Right" VerticalAlignment="Center" Checked="toggle_Checked" />
             </Grid>
 
-            <TextBlock 
-                Grid.Row="1" 
+            
+            <StackPanel Grid.Row="1">
+                <TextBlock 
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Center" 
                 FontFamily="{StaticResource FontAwesome-Regular}" 
-                Text="&#xf8f4;" 
                 FontSize="52" 
-                />
+                >
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=toggle,Path=IsChecked}" Value="True">
+                                    <Setter Property="Text" Value="{Binding ElementName=tile,Path=ActiveIcon}"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=toggle,Path=IsChecked}" Value="False">
+                                    <Setter Property="Text" Value="{Binding ElementName=tile,Path=InActiveIcon}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+                <TextBlock Text="{Binding ElementName=tile,Path=Title}" Foreground="Black" HorizontalAlignment="Center" Margin="0 8 0 0" />
+            </StackPanel>
         </Grid>
     </Border>
 </UserControl>

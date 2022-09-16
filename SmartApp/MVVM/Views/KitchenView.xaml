@@ -18,9 +18,9 @@
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
 
-                <Button Grid.Row="0" x:Name="btnClose" Click="btnClose_Click" Style="{StaticResource closeButton}"/>
+                <!--<Button Grid.Row="0" x:Name="btnClose" Click="btnClose_Click" Style="{StaticResource closeButton}"/>-->
 
-                <Grid Grid.Row="1" Margin="50 10">
+                <Grid Grid.Row="0" Margin="50 ">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="auto" />
@@ -51,10 +51,7 @@
                             <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
 
-                        <components:Tile Grid.Row="0" Grid.Column="0" />
-                        <components:Tile Grid.Row="0" Grid.Column="1" />
-                        <components:Tile Grid.Row="1" Grid.Column="0" />
-                        <components:Tile Grid.Row="1" Grid.Column="1" />
+                        <components:Tile Title="IntelliLIGHT" ActiveIcon="&#xf672;" InActiveIcon="&#xf0eb;" Grid.Row="0" Grid.Column="0" />
 
 
                     </Grid>
