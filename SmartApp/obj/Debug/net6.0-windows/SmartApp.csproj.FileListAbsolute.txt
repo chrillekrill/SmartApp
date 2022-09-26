@@ -37,3 +37,5 @@ C:\Users\Henri\source\repos\SmartApp\SmartApp\obj\Debug\net6.0-windows\Resources
 C:\Users\Henri\source\repos\SmartApp\SmartApp\obj\Debug\net6.0-windows\Resources\Buttons.baml
 C:\Users\Henri\source\repos\SmartApp\SmartApp\obj\Debug\net6.0-windows\Components\Tile.g.cs
 C:\Users\Henri\source\repos\SmartApp\SmartApp\obj\Debug\net6.0-windows\Components\Tile.baml
+C:\Users\Henri\source\repos\SmartApp\SmartApp\obj\Debug\net6.0-windows\MVVM\Views\BedroomView.g.cs
+C:\Users\Henri\source\repos\SmartApp\SmartApp\obj\Debug\net6.0-windows\MVVM\Views\BedroomView.baml

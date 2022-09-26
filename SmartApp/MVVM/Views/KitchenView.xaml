@@ -20,28 +20,37 @@
 
                 <!--<Button Grid.Row="0" x:Name="btnClose" Click="btnClose_Click" Style="{StaticResource closeButton}"/>-->
 
-                <Grid Grid.Row="0" Margin="50 ">
+                <Grid Grid.Row="0" Margin="40 10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="50 0 0 0">
+                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
                         <TextBlock Text="{Binding Title}" Foreground="#fff" FontSize="36" FontWeight="Bold"/>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Foreground="#fff" FontSize="22">
-                                <Run Text="{Binding Temperature}" FontSize="32"/>
-                                <Run Text="{Binding TemperatureScale}" />
-                            </TextBlock>
-                            <TextBlock Margin="40 0 0 0" Foreground="#fff" FontSize="22">
-                                <Run Text="{Binding Humidity}" FontSize="32"/>
-                                <Run Text="{Binding HumidityScale}" />
-                            </TextBlock>
-                        </StackPanel>
+                        <Grid Margin="0 10 0 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Temperature}" Foreground="White" FontSize="14" FontWeight="SemiBold" />
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding TemperatureScale}" Foreground="White" FontSize="14" FontWeight="SemiBold" />
+
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="23 °C" Foreground="White" FontSize="32" FontWeight="SemiBold"  />
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="33 %" Foreground="White" FontSize="32" FontWeight="SemiBold" />
+                            </StackPanel>
+                        </Grid>
+                            
                         
                     </StackPanel>
 
-                    <Grid Grid.Column="1" Margin="40 0 0 0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Grid Grid.Column="2" Margin="40 20 0 120">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto" />
                             <ColumnDefinition Width="auto" />
@@ -52,8 +61,7 @@
                         </Grid.RowDefinitions>
 
                         <components:Tile Title="IntelliLIGHT" ActiveIcon="&#xf672;" InActiveIcon="&#xf0eb;" Grid.Row="0" Grid.Column="0" />
-
-
+             
                     </Grid>
 
                 </Grid>

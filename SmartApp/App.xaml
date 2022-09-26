@@ -18,6 +18,9 @@
             <DataTemplate DataType="{x:Type viewModels:KitchenViewModel}">
                 <view:KitchenView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:BedroomViewModel}">
+                <view:BedroomView />
+            </DataTemplate>
         </ResourceDictionary>
          
     </Application.Resources>
