@@ -13,14 +13,14 @@
         AllowsTransparency="True"
         Title="SmartApp" 
         Height="720" 
-        Width="1080">
+        Width="1280">
     <Window.DataContext>
         <viewModels:MainViewModel />
     </Window.DataContext>
 
     <!--MouseDown="TitleBar_MouseDown" MouseLeftButtonDown="TitleBar_LeftButtonMouseDown"-->
-    <Border MouseDown="TitleBar_MouseDown" MouseLeftButtonDown="TitleBar_LeftButtonMouseDown">
-        <Grid Margin="-79,20,79,-20">
+    <Border MouseDown="TitleBar_MouseDown" MouseLeftButtonDown="TitleBar_LeftButtonMouseDown" CornerRadius="12">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="auto" />

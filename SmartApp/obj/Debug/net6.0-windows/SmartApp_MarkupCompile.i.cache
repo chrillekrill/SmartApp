@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\Henri\source\repos\SmartApp\SmartApp\App.xaml
-92051810993
+8619941688
 51245123748
-14561449929
-194-200944676
-Components\MainMenuComponent.xaml;Components\Tile.xaml;MainWindow.xaml;MVVM\Views\BedroomView.xaml;MVVM\Views\KitchenView.xaml;Resources\Borders.xaml;Resources\Buttons.xaml;Resources\Fonts.xaml;Resources\MainMenuDictionary.xaml;
+15-1112011162
+202-1548473153
+Components\MainMenuComponent.xaml;Components\TileComponent.xaml;MainWindow.xaml;MVVM\Views\BedroomView.xaml;MVVM\Views\KitchenView.xaml;Resources\Fonts.xaml;Resources\MainMenuDictionary.xaml;Resources\TileDictionary.xaml;
 
-False
+True
 
