@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartApp", "SmartApp\SmartApp.csproj", "{ABCE2962-824D-407C-9FBA-797AEB5552FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartApp", "SmartApp\SmartApp.csproj", "{ABCE2962-824D-407C-9FBA-797AEB5552FF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFDevice", "WPFDevice\WPFDevice.csproj", "{596C5899-0324-4B51-B29B-73BE6DC1FDA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{ABCE2962-824D-407C-9FBA-797AEB5552FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABCE2962-824D-407C-9FBA-797AEB5552FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABCE2962-824D-407C-9FBA-797AEB5552FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{596C5899-0324-4B51-B29B-73BE6DC1FDA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{596C5899-0324-4B51-B29B-73BE6DC1FDA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{596C5899-0324-4B51-B29B-73BE6DC1FDA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{596C5899-0324-4B51-B29B-73BE6DC1FDA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
