@@ -14,16 +14,19 @@
         <Grid Margin="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0" Text="{Binding Title}" />
+            <TextBlock Grid.Row="1" Text="{Binding Temperature}" />
 
-            <ItemsControl Grid.Row="1" x:Name="deviceTileListView" ItemsSource="{Binding DeviceItems}">
+            <ItemsControl Grid.Row="2" x:Name="deviceTileListView" ItemsSource="{Binding DeviceItems}">
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <components:TileComponent 
+                            
                             DeviceName="{Binding DeviceName}" 
                             DeviceType="{Binding DeviceType}"
                             IconActive="{Binding IconActive}"

@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Microsoft.Azure.Devices;
+using Newtonsoft.Json;
+using SmartApp.MVVM;
+using SmartApp.MVVM.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +24,18 @@ namespace SmartApp.Components
     /// </summary>
     public partial class TileComponent : UserControl
     {
+        private readonly RegistryManager registryManager = RegistryManager.CreateFromConnectionString("HostName=iothubv73.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=QkPsCR+vmNjexd1ggpjtGzppwC+Udq0LymJL3jgUxIQ=");
+
         public TileComponent()
         {
             InitializeComponent();
+        }
+
+        public static readonly DependencyProperty DeviceIdProperty = DependencyProperty.Register("DeviceId", typeof(string), typeof(TileComponent));
+        public string DeviceId
+        {
+            get { return (string)GetValue(DeviceIdProperty); }
+            set { SetValue(DeviceIdProperty, value); }
         }
 
         public static readonly DependencyProperty DeviceNameProperty = DependencyProperty.Register("DeviceName", typeof(string), typeof(TileComponent));
@@ -31,7 +44,6 @@ namespace SmartApp.Components
             get { return (string)GetValue(DeviceNameProperty); }
             set { SetValue(DeviceNameProperty, value); }
         }
-
         public static readonly DependencyProperty DeviceTypeProperty = DependencyProperty.Register("DeviceType", typeof(string), typeof(TileComponent));
         public string DeviceType
         {
@@ -77,6 +89,28 @@ namespace SmartApp.Components
         {
             get { return (string)GetValue(StateInActiveProperty); }
             set { SetValue(StateInActiveProperty, value); }
+        }
+
+        private async void removeDevice_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var button = sender as Button;
+                var deviceItem = (DeviceItem)button!.DataContext;
+
+
+                using ServiceClient serviceClient = ServiceClient.CreateFromConnectionString("HostName=iothubv73.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=QkPsCR+vmNjexd1ggpjtGzppwC+Udq0LymJL3jgUxIQ=");
+
+                var directMethod = new CloudToDeviceMethod("RemoveDevice");
+                var result = await serviceClient.InvokeDeviceMethodAsync(deviceItem.DeviceId, directMethod);
+                var resultText = result.GetPayloadAsJson();
+                if(resultText == "OK")
+                {
+                    await registryManager.RemoveDeviceAsync(deviceItem.DeviceId);
+                    await registryManager.
+                }
+            }
+            catch { }
         }
     }
 }

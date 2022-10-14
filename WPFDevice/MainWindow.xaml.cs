@@ -24,6 +24,7 @@ using SmartApp.Models;
 using System.IO;
 using Microsoft.Azure.Amqp.Framing;
 using System.Windows.Controls.Primitives;
+using static Dapper.SqlMapper;
 
 namespace SmartApp
 {
@@ -34,17 +35,17 @@ namespace SmartApp
     {
         static string workingDirectory = Environment.CurrentDirectory;
         static string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
-        private readonly string _connect_url = "https://iot-function-app-v73.azurewebsites.net/api/devices/connect?";
-        private readonly string _connectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={projectDirectory}\\Data\\device_db.mdf;Integrated Security=True;Connect Timeout=30";
-        private DeviceClient _deviceClient;
-        private string _deviceName = "intelliFAN";
-        private string _deviceType = "fan";
+        private static readonly string _connect_url = "https://iot-function-app-v73.azurewebsites.net/api/devices/connect?";
+        private static readonly string _connectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={projectDirectory}\\Data\\device_db.mdf;Integrated Security=True;Connect Timeout=30";
+        private static DeviceClient _deviceClient;
+        private string _deviceName = "intelliTEMP";
+        private string _deviceType = "thermometer";
         private string _owner = "Christoffer Korell";
         private string _location = "kitchen";
         private bool _state = false;
         private bool _prevState = false;
         private string _deviceId;
-        private int _interval = 1000;
+        private int _messageInterval = 15000;
         private bool _connected = false;
         public MainWindow()
         {
@@ -55,7 +56,7 @@ namespace SmartApp
 
         private async Task SetupAsync()
         {
-            //tbStateMessage.Text = "Initializing device. Please wait...";
+            tbStateMessage.Text = "Initializing device. Please wait...";
 
             using IDbConnection conn = new SqlConnection(_connectionString);
             var exists = await conn.QueryFirstOrDefaultAsync<string>("SELECT CASE WHEN OBJECT_ID('dbo.DeviceInfo', 'U') IS NOT NULL THEN 1 ELSE 0 END");
@@ -93,10 +94,13 @@ namespace SmartApp
             twinCollection["deviceType"] = _deviceType;
             twinCollection["owner"] = _owner;
             twinCollection["location"] = _location;
+            twinCollection["messageInterval"] = _messageInterval;
 
             await _deviceClient.UpdateReportedPropertiesAsync(twinCollection);
 
             _connected = true;
+
+            SetDirectMethodAsync().ConfigureAwait(false);
 
             tbStateMessage.Text = "Device connected.";
         }
@@ -127,8 +131,15 @@ namespace SmartApp
                         twinCollection["state"] = _state;
                         await _deviceClient.UpdateReportedPropertiesAsync(twinCollection);
                     }
+                    var simulatedRandomTemperature = new Random();
+                    var temp = simulatedRandomTemperature.Next(30,100);
+
+                    var twinTempSensor = new TwinCollection();
+                    twinTempSensor["temperature"] = temp;
+                    await _deviceClient.UpdateReportedPropertiesAsync(twinTempSensor);
+
                 }
-                await Task.Delay(_interval);
+                await Task.Delay(_messageInterval);
             }
 
         }
@@ -140,6 +151,29 @@ namespace SmartApp
                 btnOnOff.Content = "Turn Off";
             else
                 btnOnOff.Content = "Turn On";
+        }
+
+        private async Task SetDirectMethodAsync()
+        {
+            await _deviceClient.SetMethodHandlerAsync("RemoveDevice", RemoveDevice, null);   
+        }
+
+        private Task<MethodResponse> RemoveDevice(MethodRequest methodRequest, object userContext)
+        {
+            try
+            {
+                using IDbConnection conn = new SqlConnection(_connectionString);
+                conn.ExecuteAsync("DELETE FROM DeviceInfo");
+
+
+
+                return Task.FromResult(new MethodResponse(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject("OK")), 200));
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(new MethodResponse(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(ex)), 400));
+            }
+
         }
     }
 }

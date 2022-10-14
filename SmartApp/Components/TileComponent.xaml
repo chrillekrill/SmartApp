@@ -11,6 +11,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
@@ -28,7 +29,7 @@
                 <TextBlock Style="{StaticResource tilePanelDeviceName}"  />
                 <TextBlock Style="{StaticResource tilePanelDeviceType}"  />
             </StackPanel>
-
+            <Button Click="removeDevice_Click" Grid.Row="2" Content="Remove"></Button>
         </Grid>
     </Border>
 </UserControl>

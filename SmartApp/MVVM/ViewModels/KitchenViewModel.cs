@@ -4,6 +4,7 @@ using SmartApp.MVVM.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ using System.Windows.Threading;
 
 namespace SmartApp.MVVM.ViewModels
 {
-    internal class KitchenViewModel
+    internal class KitchenViewModel : ObservableObject
     {
         private DispatcherTimer timer;
         private ObservableCollection<DeviceItem> _deviceItems;
@@ -23,12 +24,24 @@ namespace SmartApp.MVVM.ViewModels
             _tempList = new List<DeviceItem>();
             _deviceItems = new ObservableCollection<DeviceItem>();
             PopulateDeviceItemsAsync().ConfigureAwait(false);
-            SetInterval(TimeSpan.FromSeconds(3));
+            updateTemperature().ConfigureAwait(false);
+            SetInterval(TimeSpan.FromSeconds(20));
+            
         }
 
 
         public string Title { get; set; } = "Kitchen";
-        public string Temperature { get; set; } = "23 °C";
+
+        private string _temperature;
+        public string Temperature
+        {
+            get => _temperature!;
+            set
+            {
+                _temperature = value;
+                OnPropertyChanged();
+            }
+        }
         public string Humidity { get; set; } = "34 %";
         public IEnumerable<DeviceItem> DeviceItems => _deviceItems;
 
@@ -47,10 +60,29 @@ namespace SmartApp.MVVM.ViewModels
 
         private async void timer_tick(object sender, EventArgs e)
         {
+            await updateTemperature();
             await PopulateDeviceItemsAsync();
-            await UpdateDeviceItemsAsync();
+            await UpdateDeviceItemsAsync();     
         }
 
+        private async Task updateTemperature()
+        {
+            var result = registryManager.CreateQuery("SELECT * FROM devices WHERE properties.reported.location = 'kitchen'");
+            if (result.HasMoreResults)
+            {
+                foreach (Twin twin in await result.GetNextAsTwinAsync())
+                {
+                    var t = await registryManager.GetTwinAsync(twin.DeviceId);
+
+                    try
+                    {
+                        int temp = (int)t.Properties.Reported["temperature"];
+                        Temperature = $"{temp} °C";
+                    }
+                    catch { }
+                }
+            }
+        }
 
         private async Task UpdateDeviceItemsAsync()
         {
@@ -107,7 +139,12 @@ namespace SmartApp.MVVM.ViewModels
                                 device.StateActive = "ON";
                                 device.StateInActive = "OFF";
                                 break;
-
+                            case "thermometer":
+                                device.IconActive = "\uf2c8";
+                                device.IconInActive = "\uf2cb";
+                                device.StateActive = "DISABLE";
+                                device.StateInActive = "ENABLE";
+                                break;
                             default:
                                 device.IconActive = "\uf2db";
                                 device.IconInActive = "\uf2db";

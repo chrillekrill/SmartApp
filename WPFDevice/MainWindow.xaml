@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SmartApp"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="IOT DEVICE" Height="150" Width="1000">
+        Title="IOT DEVICE" Height="150" Width="250">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock x:Name="tbStateMessage" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" />
