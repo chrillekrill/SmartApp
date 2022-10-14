@@ -95,12 +95,13 @@ namespace SmartApp
             twinCollection["owner"] = _owner;
             twinCollection["location"] = _location;
             twinCollection["messageInterval"] = _messageInterval;
+            twinCollection["state"] = _state;
 
             await _deviceClient.UpdateReportedPropertiesAsync(twinCollection);
 
             _connected = true;
 
-            SetDirectMethodAsync().ConfigureAwait(false);
+            await SetDirectMethodsAsync();
 
             tbStateMessage.Text = "Device connected.";
         }
@@ -153,9 +154,10 @@ namespace SmartApp
                 btnOnOff.Content = "Turn On";
         }
 
-        private async Task SetDirectMethodAsync()
+        private async Task SetDirectMethodsAsync()
         {
-            await _deviceClient.SetMethodHandlerAsync("RemoveDevice", RemoveDevice, null);   
+            await _deviceClient.SetMethodHandlerAsync("RemoveDevice", RemoveDevice, null);
+            await _deviceClient.SetMethodHandlerAsync("ChangeDeviceState", ChangeDeviceState, null);
         }
 
         private Task<MethodResponse> RemoveDevice(MethodRequest methodRequest, object userContext)
@@ -165,13 +167,29 @@ namespace SmartApp
                 using IDbConnection conn = new SqlConnection(_connectionString);
                 conn.ExecuteAsync("DELETE FROM DeviceInfo");
 
-
-
                 return Task.FromResult(new MethodResponse(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject("OK")), 200));
             }
             catch (Exception ex)
             {
                 return Task.FromResult(new MethodResponse(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(ex)), 400));
+            }
+
+        }
+
+        private async Task<MethodResponse> ChangeDeviceState(MethodRequest methodRequest, object userContext)
+        {
+            try
+            {
+                _state = !_state;
+                var twinCollection = new TwinCollection();
+                twinCollection["state"] = _state;
+                await _deviceClient.UpdateReportedPropertiesAsync(twinCollection);
+
+                return await Task.FromResult(new MethodResponse(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(_state)), 200));
+            }
+            catch (Exception ex)
+            {
+                return await Task.FromResult(new MethodResponse(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(ex)), 400));
             }
 
         }

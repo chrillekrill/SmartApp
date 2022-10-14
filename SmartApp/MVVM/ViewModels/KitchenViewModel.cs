@@ -17,19 +17,40 @@ namespace SmartApp.MVVM.ViewModels
         private DispatcherTimer timer;
         private ObservableCollection<DeviceItem> _deviceItems;
         private List<DeviceItem> _tempList;
-        private readonly RegistryManager registryManager = RegistryManager.CreateFromConnectionString("HostName=iothubv73.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=QkPsCR+vmNjexd1ggpjtGzppwC+Udq0LymJL3jgUxIQ=");
+        private readonly RegistryManager registryManager = RegistryManager.CreateFromConnectionString("HostName=iothubv74.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=7MWoKQE1RIODQmLaQTxtbH2bCU45zNsy0DhBx7Rs1nM=");
 
         public KitchenViewModel()
         {
             _tempList = new List<DeviceItem>();
             _deviceItems = new ObservableCollection<DeviceItem>();
+            SetClock();
             PopulateDeviceItemsAsync().ConfigureAwait(false);
             updateTemperature().ConfigureAwait(false);
-            SetInterval(TimeSpan.FromSeconds(20));
+            SetInterval(TimeSpan.FromSeconds(10));
             
         }
 
+        private string? _currentTime;
+        public string CurrentTime
+        {
+            get => _currentTime!;
+            set
+            {
+                _currentTime = value;
+                OnPropertyChanged();
+            }
+        }
 
+        private string? _currentDate;
+        public string CurrentDate
+        {
+            get => _currentDate!;
+            set
+            {
+                _currentDate = value;
+                OnPropertyChanged();
+            }
+        }
         public string Title { get; set; } = "Kitchen";
 
         private string _temperature;
@@ -43,9 +64,15 @@ namespace SmartApp.MVVM.ViewModels
             }
         }
         public string Humidity { get; set; } = "34 %";
-        public IEnumerable<DeviceItem> DeviceItems => _deviceItems;
-
-
+        public ObservableCollection<DeviceItem>? DeviceItems
+        {
+            get => _deviceItems;
+            set
+            {
+                _deviceItems = value;
+                OnPropertyChanged();
+            }
+        }
 
         private void SetInterval(TimeSpan interval)
         {
@@ -60,9 +87,16 @@ namespace SmartApp.MVVM.ViewModels
 
         private async void timer_tick(object sender, EventArgs e)
         {
+            SetClock();
             await updateTemperature();
             await PopulateDeviceItemsAsync();
             await UpdateDeviceItemsAsync();     
+        }
+
+        private void SetClock()
+        {
+            CurrentTime = DateTime.Now.ToString("HH:mm");
+            CurrentDate = DateTime.Now.ToString("dd MMMM yyyy");
         }
 
         private async Task updateTemperature()
@@ -77,7 +111,7 @@ namespace SmartApp.MVVM.ViewModels
                     try
                     {
                         int temp = (int)t.Properties.Reported["temperature"];
-                        Temperature = $"{temp} °C";
+                        Temperature = $"{temp}";
                     }
                     catch { }
                 }
@@ -154,6 +188,7 @@ namespace SmartApp.MVVM.ViewModels
                         }
 
                         _deviceItems.Add(device);
+                        OnPropertyChanged();
                     }
                     else { }
                 }

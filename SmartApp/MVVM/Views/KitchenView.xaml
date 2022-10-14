@@ -11,21 +11,40 @@
             <ImageBrush ImageSource="/Assets/Images/Kitchen.jpg" />
         </Border.Background>
 
-        <Grid Margin="20">
+        <Grid Margin="30">
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Text="{Binding Title}" />
-            <TextBlock Grid.Row="1" Text="{Binding Temperature}" />
+            <Grid Grid.Row="0" Margin="0 0 0 50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
 
-            <ItemsControl Grid.Row="2" x:Name="deviceTileListView" ItemsSource="{Binding DeviceItems}">
+                <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock FontSize="22" Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Run Text="{Binding Temperature}" FontSize="32" />
+                        <Run Text="°C" />
+                    </TextBlock>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 -15 0 0">
+                    <TextBlock Text="{Binding CurrentTime}" FontSize="52" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Top"  />
+                    <TextBlock Text="{Binding CurrentDate}" FontSize="20" Foreground="Black" HorizontalAlignment="Center" />
+                </StackPanel>
+
+                <Button Grid.Column="2" Content="&#xE713;" FontFamily="Segoe MDL2 Assets"  FontSize="32" Background="Transparent" Foreground="Black" BorderThickness="0" HorizontalAlignment="Right" VerticalAlignment="Top" />
+
+            </Grid>
+
+            <ItemsControl Grid.Row="1" x:Name="deviceTileListView" ItemsSource="{Binding DeviceItems}">
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <components:TileComponent 
+                        <components:TileComponent
                             
                             DeviceName="{Binding DeviceName}" 
                             DeviceType="{Binding DeviceType}"

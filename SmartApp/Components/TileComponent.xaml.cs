@@ -4,11 +4,13 @@ using SmartApp.MVVM;
 using SmartApp.MVVM.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -16,19 +18,27 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Runtime.CompilerServices;
 
 namespace SmartApp.Components
 {
     /// <summary>
     /// Interaction logic for TileComponent.xaml
     /// </summary>
-    public partial class TileComponent : UserControl
+    public partial class TileComponent : UserControl, INotifyPropertyChanged
     {
-        private readonly RegistryManager registryManager = RegistryManager.CreateFromConnectionString("HostName=iothubv73.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=QkPsCR+vmNjexd1ggpjtGzppwC+Udq0LymJL3jgUxIQ=");
+        private readonly RegistryManager registryManager = RegistryManager.CreateFromConnectionString("HostName=iothubv74.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=7MWoKQE1RIODQmLaQTxtbH2bCU45zNsy0DhBx7Rs1nM=");
 
         public TileComponent()
         {
             InitializeComponent();
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string name = null!)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
         public static readonly DependencyProperty DeviceIdProperty = DependencyProperty.Register("DeviceId", typeof(string), typeof(TileComponent));
@@ -99,18 +109,40 @@ namespace SmartApp.Components
                 var deviceItem = (DeviceItem)button!.DataContext;
 
 
-                using ServiceClient serviceClient = ServiceClient.CreateFromConnectionString("HostName=iothubv73.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=QkPsCR+vmNjexd1ggpjtGzppwC+Udq0LymJL3jgUxIQ=");
+                using ServiceClient serviceClient = ServiceClient.CreateFromConnectionString("HostName=iothubv74.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=7MWoKQE1RIODQmLaQTxtbH2bCU45zNsy0DhBx7Rs1nM=");
 
                 var directMethod = new CloudToDeviceMethod("RemoveDevice");
                 var result = await serviceClient.InvokeDeviceMethodAsync(deviceItem.DeviceId, directMethod);
-                var resultText = result.GetPayloadAsJson();
-                if(resultText == "OK")
+                if(result.Status == 200)
                 {
                     await registryManager.RemoveDeviceAsync(deviceItem.DeviceId);
-                    await registryManager.
+                    deviceNameStyle.FontSize = 10;
+                    DeviceName = "Removing device please wait...";
+                    DeviceType = "";
+                    removeDevice.Content = "Removed";
+                    OnPropertyChanged();
+                } else
+                {
+                    var error = result.GetPayloadAsJson();
+                    var errorMsg = error;
                 }
             }
             catch { }
+        }
+
+        private async void toggleButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var button = sender as Button;
+                var deviceItem = (DeviceItem)toggleButton!.DataContext;
+
+                using ServiceClient serviceClient = ServiceClient.CreateFromConnectionString("HostName=iothubv74.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=7MWoKQE1RIODQmLaQTxtbH2bCU45zNsy0DhBx7Rs1nM=");
+                var directMethod = new CloudToDeviceMethod("ChangeDeviceState");
+                var result = await serviceClient.InvokeDeviceMethodAsync(deviceItem.DeviceId, directMethod);
+                var resultText = result.GetPayloadAsJson();
+       
+            } catch { }
         }
     }
 }

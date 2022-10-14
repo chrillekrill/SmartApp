@@ -21,15 +21,15 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Column="0" Style="{StaticResource tilePanelState}" />
-                <CheckBox x:Name="toggleButton" Grid.Column="1" Style="{StaticResource tilePanelToggleButton }" HorizontalAlignment="Right" />
+                <CheckBox x:Name="toggleButton" Click="toggleButton_Click" Grid.Column="1" Style="{StaticResource tilePanelToggleButton }" HorizontalAlignment="Right" />
             </Grid>
 
             <StackPanel Grid.Row="1" Margin="0 20 0 0" HorizontalAlignment="Center">
                 <TextBlock Style="{StaticResource tilePanelIcon}" />
-                <TextBlock Style="{StaticResource tilePanelDeviceName}"  />
+                <TextBlock x:Name="deviceNameStyle" Style="{StaticResource tilePanelDeviceName}"  />
                 <TextBlock Style="{StaticResource tilePanelDeviceType}"  />
             </StackPanel>
-            <Button Click="removeDevice_Click" Grid.Row="2" Content="Remove"></Button>
+            <Button Click="removeDevice_Click" x:Name="removeDevice" Grid.Row="2" Content="Remove"></Button>
         </Grid>
     </Border>
 </UserControl>
