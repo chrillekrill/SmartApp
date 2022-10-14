@@ -8,7 +8,7 @@
              d:DesignHeight="720" d:DesignWidth="1280">
     <Border CornerRadius="12">
         <Border.Background>
-            <ImageBrush ImageSource="/Assets/Images/Kitchen.jpg" />
+            <ImageBrush ImageSource="/Assets/Images/Bedroom.jpg" />
         </Border.Background>
 
         <Grid Margin="20">
@@ -28,8 +28,7 @@
                             DeviceType="{Binding DeviceType}"
                             IconActive="{Binding IconActive}"
                             IconInActive="{Binding IconInActive}"
-                            StateActive="{Binding StateActive}"
-                            StateInActive="{Binding StateInActive}"
+                            IsChecked="{Binding DeviceState}"
                             />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

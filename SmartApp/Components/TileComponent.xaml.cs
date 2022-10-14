@@ -85,20 +85,16 @@ namespace SmartApp.Components
             set { SetValue(IconInActiveProperty, value); }
         }
 
-        public static readonly DependencyProperty StateActiveProperty = DependencyProperty.Register("StateActive", typeof(string), typeof(TileComponent));
+        private bool _deviceState;
 
-        public string StateActive
+        public bool DeviceState
         {
-            get { return (string)GetValue(StateActiveProperty); }
-            set { SetValue(StateActiveProperty, value); }
-        }
-
-        public static readonly DependencyProperty StateInActiveProperty = DependencyProperty.Register("StateInActive", typeof(string), typeof(TileComponent));
-
-        public string StateInActive
-        {
-            get { return (string)GetValue(StateInActiveProperty); }
-            set { SetValue(StateInActiveProperty, value); }
+            get { return _deviceState; }
+            set
+            {
+                _deviceState = value;
+                OnPropertyChanged();
+            }
         }
 
         private async void removeDevice_Click(object sender, RoutedEventArgs e)

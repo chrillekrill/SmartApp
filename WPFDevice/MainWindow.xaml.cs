@@ -25,6 +25,8 @@ using System.IO;
 using Microsoft.Azure.Amqp.Framing;
 using System.Windows.Controls.Primitives;
 using static Dapper.SqlMapper;
+using Microsoft.Azure.Devices;
+using Message = Microsoft.Azure.Devices.Client.Message;
 
 namespace SmartApp
 {
@@ -36,6 +38,7 @@ namespace SmartApp
         static string workingDirectory = Environment.CurrentDirectory;
         static string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
         private static readonly string _connect_url = "https://iot-function-app-v73.azurewebsites.net/api/devices/connect?";
+        private readonly RegistryManager registryManager = RegistryManager.CreateFromConnectionString("HostName=iothubv74.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=7MWoKQE1RIODQmLaQTxtbH2bCU45zNsy0DhBx7Rs1nM=");
         private static readonly string _connectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={projectDirectory}\\Data\\device_db.mdf;Integrated Security=True;Connect Timeout=30";
         private static DeviceClient _deviceClient;
         private string _deviceName = "intelliTEMP";
@@ -61,17 +64,19 @@ namespace SmartApp
             using IDbConnection conn = new SqlConnection(_connectionString);
             var exists = await conn.QueryFirstOrDefaultAsync<string>("SELECT CASE WHEN OBJECT_ID('dbo.DeviceInfo', 'U') IS NOT NULL THEN 1 ELSE 0 END");
 
-            if(exists == "0")
+            if (exists == "0")
                 await conn.ExecuteAsync("CREATE TABLE DeviceInfo(DeviceId nvarchar(450) not null primary key,ConnectionString nvarchar(max) null,DeviceName nvarchar(max) null,DeviceType nvarchar(max) null,Location nvarchar(max) null,Owner nvarchar(max) null,)");
 
             _deviceId = await conn.QueryFirstOrDefaultAsync<string>("SELECT DeviceId FROM DeviceInfo");
             if (string.IsNullOrEmpty(_deviceId))
             {
+                var device = registryManager.CreateQuery("select * from devices where properties.reported.location = 'kitchen' and properties.reported.deviceType = 'thermometer'");
                 tbStateMessage.Text = "Generating new DeviceID";
                 _deviceId = Guid.NewGuid().ToString();
                 await conn.ExecuteAsync("INSERT INTO DeviceInfo (DeviceId) VALUES (@DeviceId)", new { DeviceId = _deviceId });
             }
 
+            
             var device_ConnectionString
                 = await conn.QueryFirstOrDefaultAsync<string>
                 ("SELECT ConnectionString FROM DeviceInfo WHERE DeviceId = @DeviceId",
@@ -133,7 +138,7 @@ namespace SmartApp
                         await _deviceClient.UpdateReportedPropertiesAsync(twinCollection);
                     }
                     var simulatedRandomTemperature = new Random();
-                    var temp = simulatedRandomTemperature.Next(30,100);
+                    var temp = simulatedRandomTemperature.Next(30, 100);
 
                     var twinTempSensor = new TwinCollection();
                     twinTempSensor["temperature"] = temp;

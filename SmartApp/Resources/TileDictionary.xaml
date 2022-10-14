@@ -21,13 +21,15 @@
         <Setter Property="Margin" Value="0 0 50 0" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Text" Value="{Binding ElementName=tile,Path=StateInActive}" />
+        <Setter Property="Text" Value="{Binding ElementName=tile,Path=DeviceState}" />
         <Style.Triggers>
             <DataTrigger Binding="{Binding ElementName=toggleButton,Path=IsChecked}" Value="True">
-                <Setter Property="Text" Value="{Binding ElementName=tile,Path=StateActive}" />
+                <Setter Property="Foreground" Value="Green" />
+                <Setter Property="Text" Value="ON" />
             </DataTrigger>
             <DataTrigger Binding="{Binding ElementName=toggleButton,Path=IsChecked}" Value="False">
-                <Setter Property="Text" Value="{Binding ElementName=tile,Path=StateInActive}" />
+                <Setter Property="Foreground" Value="Red" />
+                <Setter Property="Text" Value="OFF" />
             </DataTrigger>
         </Style.Triggers>
     </Style>

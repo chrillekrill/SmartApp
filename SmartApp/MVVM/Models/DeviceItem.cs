@@ -15,7 +15,6 @@ namespace SmartApp.MVVM.Models
 
         public string IconActive { get; set; } = "";
         public string IconInActive { get; set; } = "";
-        public string StateActive { get; set; } = "";
-        public string StateInActive { get; set; } = "";
+        public bool DeviceState { get; set; }
     }
 }

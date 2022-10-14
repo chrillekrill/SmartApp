@@ -124,3 +124,5 @@ C:\Users\Henri\source\repos\SmartApp\WPFDevice\obj\Debug\net6.0-windows\refint\W
 C:\Users\Henri\source\repos\SmartApp\WPFDevice\obj\Debug\net6.0-windows\WPFDevice.pdb
 C:\Users\Henri\source\repos\SmartApp\WPFDevice\obj\Debug\net6.0-windows\WPFDevice.genruntimeconfig.cache
 C:\Users\Henri\source\repos\SmartApp\WPFDevice\obj\Debug\net6.0-windows\ref\WPFDevice.dll
+C:\Users\Henri\source\repos\SmartApp\WPFDevice\bin\Debug\net6.0-windows\Microsoft.Azure.Devices.dll
+C:\Users\Henri\source\repos\SmartApp\WPFDevice\bin\Debug\net6.0-windows\Microsoft.Rest.ClientRuntime.dll

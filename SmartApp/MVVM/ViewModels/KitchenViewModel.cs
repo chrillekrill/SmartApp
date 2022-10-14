@@ -157,33 +157,27 @@ namespace SmartApp.MVVM.ViewModels
                         catch { device.DeviceName = device.DeviceId; }
                         try { device.DeviceType = twin.Properties.Reported["deviceType"]; }
                         catch { }
+                        try { device.DeviceState = twin.Properties.Reported["state"]; }
+                        catch { }
 
                         switch (device.DeviceType.ToLower())
                         {
                             case "fan":
                                 device.IconActive = "\uf863";
                                 device.IconInActive = "\uf863";
-                                device.StateActive = "ON";
-                                device.StateInActive = "OFF";
                                 break;
 
                             case "light":
                                 device.IconActive = "\uf672";
                                 device.IconInActive = "\uf0eb";
-                                device.StateActive = "ON";
-                                device.StateInActive = "OFF";
                                 break;
                             case "thermometer":
                                 device.IconActive = "\uf2c8";
                                 device.IconInActive = "\uf2cb";
-                                device.StateActive = "DISABLE";
-                                device.StateInActive = "ENABLE";
                                 break;
                             default:
                                 device.IconActive = "\uf2db";
                                 device.IconInActive = "\uf2db";
-                                device.StateActive = "ENABLE";
-                                device.StateInActive = "DISABLE";
                                 break;
                         }
 
