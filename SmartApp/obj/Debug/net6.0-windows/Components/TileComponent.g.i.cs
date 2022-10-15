@@ -85,7 +85,7 @@ namespace SmartApp.Components {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/SmartApp;component/components/tilecomponent.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/SmartApp;V1.0.0.0;component/components/tilecomponent.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Components\TileComponent.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

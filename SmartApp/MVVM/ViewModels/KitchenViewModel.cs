@@ -101,7 +101,7 @@ namespace SmartApp.MVVM.ViewModels
 
         private async Task updateTemperature()
         {
-            var result = registryManager.CreateQuery("SELECT * FROM devices WHERE properties.reported.location = 'kitchen'");
+            var result = registryManager.CreateQuery("select * from devices WHERE properties.reported.location = 'kitchen'");
             if (result.HasMoreResults)
             {
                 foreach (Twin twin in await result.GetNextAsTwinAsync())
@@ -137,7 +137,6 @@ namespace SmartApp.MVVM.ViewModels
 
         private async Task PopulateDeviceItemsAsync()
         {
-            //var result = registryManager.CreateQuery("select * from devices where location = 'kitchen'");
             var result = registryManager.CreateQuery("select * from devices where properties.reported.location = 'kitchen'");
 
             if (result.HasMoreResults)

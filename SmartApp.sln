@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartApp", "SmartApp\SmartA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFDevice", "WPFDevice\WPFDevice.csproj", "{596C5899-0324-4B51-B29B-73BE6DC1FDA6}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureFunctions", "AzureFunctions\AzureFunctions.csproj", "{82D45C48-3A8F-4FC6-9846-7324B991BBDD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{596C5899-0324-4B51-B29B-73BE6DC1FDA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{596C5899-0324-4B51-B29B-73BE6DC1FDA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{596C5899-0324-4B51-B29B-73BE6DC1FDA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82D45C48-3A8F-4FC6-9846-7324B991BBDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82D45C48-3A8F-4FC6-9846-7324B991BBDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82D45C48-3A8F-4FC6-9846-7324B991BBDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82D45C48-3A8F-4FC6-9846-7324B991BBDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
